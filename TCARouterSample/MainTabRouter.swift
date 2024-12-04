@@ -43,18 +43,16 @@ struct MainTabRouter {
         case notification(NotificationRoot.Action)
         case message(MessageRoot.Action)
         case selectedTabChanged(State.Tab) // タブ切り替え用アクション
-        case delegate(Delegate)
-
-        public enum Delegate {
-            case backToFirstView
-        }
+        case backToFirstView
     }
+
+    @Dependency(\.dismiss) var dismiss
 
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .home(.delegate(.backToFirstView)):
-                return .send(.delegate(.backToFirstView))
+                return .send(.backToFirstView)
             case .home:
                 return .none
             case .search:
@@ -75,8 +73,8 @@ struct MainTabRouter {
                 }
                 state.selectedTab = nextTab
                 return .none
-            case .delegate(.backToFirstView):
-                return .none
+            case .backToFirstView:
+                return .run { _ in await dismiss()}
             }
         }
         Scope(state: \.home, action: \.home) {
