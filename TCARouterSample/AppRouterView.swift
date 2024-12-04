@@ -18,11 +18,9 @@ struct AppRouterView: View {
 
     var body: some View {
         switch store.destination {
-        case .auth:
-            if let store = store.scope(state: \.destination?.auth, action: \.destination.auth) {
-                // 初期画面
-                AuthRootView(store: store)
-            }
+        case .none:
+            // 初期画面
+            AuthRootView(store: store.scope(state: \.auth, action: \.auth))
         case .setup:
             if let store = store.scope(state: \.destination?.setup, action: \.destination.setup) {
                 // セットアップ画面
@@ -33,8 +31,6 @@ struct AppRouterView: View {
                 // メインタブ画面
                 MainTabRouterView(store: store)
             }
-        default:
-            EmptyView()
         }
     }
 }
