@@ -14,6 +14,7 @@ public struct HomeRootView: View {
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             VStack {
+                Text("HomeRootView")
                 Button("Go to Child") {
                     store.send(.toChild)
                 }

@@ -17,7 +17,6 @@ public struct HomeChildView: View {
 
     public var body: some View {
         VStack {
-            Text("HomeChildView")
             Button("Go to Next Child") {
                 store.send(.delegate(.nextChildButtonTapped))
             }

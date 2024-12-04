@@ -12,10 +12,19 @@ public struct SetupRootView: View {
     }
 
     public var body: some View {
-        VStack {
-            Button("Go to MainTab") {
-                store.send(.delegate(.toMainTabButtonTapped))
+        ZStack(alignment: .topLeading) {
+            VStack {
+                Button("Go to MainTab") {
+                    store.send(.delegate(.toMainTabButtonTapped))
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            // 左上に表示する番号とタイトル
+            Text("2. SetupRootView")
+                .font(.largeTitle)
+                .foregroundColor(.blue)
+                .padding(.leading, 10)
         }
     }
 }

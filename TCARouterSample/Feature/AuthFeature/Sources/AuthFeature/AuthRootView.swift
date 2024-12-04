@@ -12,13 +12,22 @@ public struct AuthRootView: View {
     }
 
     public var body: some View {
-        VStack {
-            Button("Go to Setup") {
-                store.send(.delegate(.toSetupButtonTapped))
+        ZStack(alignment: .topLeading) {
+            VStack {
+                Button("Go to Setup") {
+                    store.send(.delegate(.toSetupButtonTapped))
+                }
+                Button("Go to MainTab") {
+                    store.send(.delegate(.toMainTabButtonTapped))
+                }
             }
-            Button("Go to MainTab") {
-                store.send(.delegate(.toMainTabButtonTapped))
-            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            // 左上に表示する番号とタイトル
+            Text("1. AuthRootView")
+                .font(.largeTitle)
+                .foregroundColor(.red)
+                .padding(.leading, 10)
         }
     }
 }
